@@ -1,7 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class PetClinic {
     private static Scanner input = new Scanner(System.in); // Create an instance of scanner
+    
 
     public static void main(String[] arg){
         /**
@@ -22,21 +24,92 @@ public class PetClinic {
     private static void addPet(){
         try {
             //Pet Type
-            System.out.println("Enter pet type (Cat / Dog): ");
-            String petType = input.nextLine();
-            if(!petType.equalsIgnoreCase("Cat") &&
-            !petType.equalsIgnoreCase("Dog")){
+            String petType = " ";
+            while(true){
+                System.out.println("Enter pet type (Cat / Dog): ");
+                petType = input.nextLine();
+                if(petType.equalsIgnoreCase("Cat") ||
+                petType.equalsIgnoreCase("Dog")){
+                    break;
+                }
                 System.out.println("Invalid pet type. Please enter a valid pet type.");
-                addPet();
-                return;
             }
             //Pet Name
-            System.out.println("Enter name: ");
-            String petName = input.nextLine();
-            if(petName.isEmpty()){
-                System.out.println("Name can't be empty. Please enter a valid name.");
-                addPet();
-                return;
+            String petName = " ";
+            while (true){
+                System.out.println("Enter pet name: ");
+                petName = input.nextLine();
+                if(petName.isEmpty()){
+                    System.out.println("Name can't be empty. Please enter a valid name.");
+                }else{
+                    break;
+                }
+            }
+            //Pet Age
+            int petAge = 0;
+            while (true){
+                System.out.println("Enter pet age: ");
+                petAge = input.nextInt();
+                input.nextLine(); //Clears buffer
+                if(petAge > 0){
+                    break;
+                }else{
+                    input.nextLine(); //Clear invalid input
+                }
+                System.out.println("Invalid age. Age must be positive.");
+            }
+            //Pet Color
+            String petColor = " ";
+            while (true){
+                System.out.println("Enter pet color: ");
+                petColor = input.nextLine();
+                if(petColor.isEmpty()){
+                    System.out.println("Color can't be empty. Please enter a valid color.");
+                }else{
+                    break;
+                }
+            }
+
+            //Pet Weight
+            double petWeight = 0;
+            while (true){
+                System.out.println("Enter pet weight: ");
+                petWeight = input.nextDouble();
+                if(petWeight > 0){
+                    break;
+                }else{
+                    input.nextLine();
+                }
+                System.out.println("Invalid weight. Weight must be positive.");
+            }
+            //Pet Breed
+            String petBreed = " ";
+            if(petType.equalsIgnoreCase("cat") || petType.equalsIgnoreCase("dog")){
+                while (true){
+                    System.out.println("Enter pet breed: ");
+                    petBreed = input.nextLine();
+                    if(petBreed.isEmpty()){
+                        System.out.println("Breed can't be empty. Please enter a valid breed.");
+                    }else{
+                        break;
+                    }
+                }
+            }
+            Pet pet = null; //Declare pet obj
+            //Create dog
+            if(petType.equalsIgnoreCase("dog")){
+                pet = new Dog(petName,petAge, petColor, petWeight, petBreed);
+            }
+            else if(petType.equalsIgnoreCase("cat")){
+                pet = new Cat(petName,petAge, petColor, petWeight, petBreed);
+            }
+            else{
+                System.out.println("Invalid pet type. Please enter a valid pet type.");
+            }
+            if(pet != null){
+                System.out.println("Pet added successfully.");
+            }else{
+                System.out.println("Error adding pet.");
             }
 
         } catch (Exception e) {
