@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class PetClinic {
     private static Scanner input = new Scanner(System.in); // Create an instance of scanner
-    
+    private static ArrayList<Pet> pets = new ArrayList<>();
 
     public static void main(String[] arg){
         /**
@@ -107,6 +107,7 @@ public class PetClinic {
                 System.out.println("Invalid pet type. Please enter a valid pet type.");
             }
             if(pet != null){
+                pets.add(pet);
                 System.out.println("Pet added successfully.");
             }else{
                 System.out.println("Error adding pet.");
